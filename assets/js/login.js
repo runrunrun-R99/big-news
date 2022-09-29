@@ -1,86 +1,82 @@
-$(function () {
+(function () {
+  // 需要从 layui对象身上取到 form
+  const form = layui.form
+  const layer = layui.layer
 
   // 点击去注册
   $('#go2Reg').on('click', function () {
-    $('.login-box').hide()
-    $('.reg-box').show()
+    $('.login-wrap').hide()
+    $('.reg-wrap').show()
   })
-
 
   // 点击去登录
   $('#go2Login').on('click', function () {
-    $('.login-box').show()
-    $('.reg-box').hide()
+    $('.reg-wrap').hide()
+    $('.login-wrap').show()
   })
-  // 需要从 layui 对象身上取到对应的属性
-  const form = layui.form
-  const layer = layui.layer
+
   form.verify({
     // 添加自定义规则
     pwd: [/^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'],
+    // 确认密码框
     repwd: function (value) {
       // 拿到密码框和再次确认密码作比较
-      // 属性选择器:$('[name=xxx]').val()
+      // 属性选择器：$('[name=xxx]').val()
       if ($('#password').val() !== value) {
-        return '两次密码输入不一致'
+        return '两次密码不一致，请重新输入'
       }
     }
   })
 
-  // 将 key=value 形式的数据,转成json格式的字符串
-  const format2Json = (source) => {
-    let target = {}
-    source.split('&').forEach((el) => {
-      let kv = el.split('=')
-      target[kv[0]] = kv[1]
-    })
-    return JSON.stringify(target)
-  }
-  // 给注册表单添加提交时间(会刷新浏览器)
-  // $('#formReg).on(submit(function)(){})
+  // 给注册表单添加提交事件（会刷新浏览器）
+  // $('#formReg').submit(function () {})
   $('#formReg').on('submit', function (e) {
+    // 阻止默认提交动作
     e.preventDefault()
-    // 发起 ajax 请求
-    // 经过分析: 1.修改content—Type 2.需要将参数转成 json 格式
+
+    // 发请求了 ajax
+    // 经过分析：1、修改 Content-Type 2、需要将参数转成 json 格式
     $.ajax({
       method: 'POST',
       url: '/api/reg',
-      contentType: 'application/json',
-      // data: JSON.stringify({
-      //   username: $('#formReg [name=username]').val(),
-      //   password: $('#formReg [name=password]').val(),
-      //   repassword: $('#formReg [name=repassword]').val()
-      // }),
       data: format2Json($(this).serialize()),
       success(res) {
         if (res.code !== 0) return layer.msg(res.message)
         $('#go2Login').click()
-        layer.msg('注册成功,请登录')
-        // 打开登陆页面 (模拟点击事件 1.click 2.trigger('click) 3.triggerHandler('click) )
-
+        // $('#go2Login').trigger('click')
+        layer.msg('注册成功')
+        // 打开登录表单(模拟点击操作：1、click 2、trigger('click') 3、triggerHandler('click'))
       }
     })
   })
 
-  // 给登录表单添加提交事件
-  $('#formLogin').on('submit', function (e) {
+  $('#formLogin').submit(function (e) {
     e.preventDefault()
-    // 发起 ajax 请求
-    // 经过分析: 1.修改content—Type 2.需要将参数转成 json 格式
     $.ajax({
       method: 'POST',
       url: '/api/login',
-      contentType: 'application/json',
-      data: format2Json($(this).serialize()),
+      data: $(this).serialize(),
       success(res) {
         if (res.code !== 0) return layer.msg(res.message)
+        // 需要干嘛呢？
         // 跳转到主页
-        // token 相当于令牌 (下一次去请求有权限的接口的时候“带着”)
+        // location.href = '/home.html'
+        // token 意思是令牌的意思（下一次去请求有权限的接口的时候“带着”）
         localStorage.setItem('big_news_token', res.token)
-        // 固定的写法:Bearer token 字符串、Bearer 译为持票人拿着 token 去请求
-        location.href = '/index.html'
+
+        // 固定的写法：Bearer token字符串、Bearer 译为持票人拿着token去请求
+
+        location.href = '/home.html'
       }
     })
   })
 })
+// 说明一下；video里面的请求地址不用了，用新的 http://big-event-vue-api-t.itheima.net
+// 原来的：Content-Type: 'application/x-www-form-urlencoded' -> key1=value1&key2=value2
+// 现在的：Content-Type需要指定：'application/json' -> '{ "key1": "value1", "key2": "value2" }'
 
+// username=qd51&password=qd51qd51&repassword=qd51qd51
+// '{ "username": "qd51", "password": "qd51qd51", "repassword": "qd51qd51" }'
+
+// let str1 = 'username=qd51&password=qd51qd51&repassword=qd51qd51'
+// console.log(format2Json(str1))
