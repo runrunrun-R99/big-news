@@ -66,7 +66,7 @@
 
         // 固定的写法：Bearer token字符串、Bearer 译为持票人拿着token去请求
 
-        location.href = '/home.html'
+        location.href = '/index.html'
       }
     })
   })
