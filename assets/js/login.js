@@ -1,4 +1,4 @@
-(function () {
+$(function () {
   // 需要从 layui对象身上取到 form
   const form = layui.form
   const layer = layui.layer
@@ -66,7 +66,7 @@
 
         // 固定的写法：Bearer token字符串、Bearer 译为持票人拿着token去请求
 
-        location.href = '/index.html'
+        location.href = '/home.html'
       }
     })
   })
