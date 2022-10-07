@@ -5,6 +5,7 @@ $(function () {
   getUserInfo()
 })
 
+
 const getUserInfo = () => {
   $.ajax({
     method: 'GET',
@@ -31,9 +32,29 @@ const renderAvatar = (res) => {
     const name = res.data.nickname || res.data.username
     // const char = name.charAt(0).toUpperCase()
     const char = name[0].toUpperCase()
-    $('.text-avatar').html(char)
+    $('.text-avatar').html(char).show()
   }
   $('.text').html(`欢迎&nbsp;&nbsp;${res.data.username}`)
+}
+// 实现退出操作
+$('#btnLogout').on('click', function () {
+  layer.confirm('您确认要退出吗？', { icon: 3, title: '提示' }, function (index) {
+    // 1.token 需要移除
+    localStorage.removeItem('big_news_token')
+    // localStorage.clear()
+    // 2.页面跳转到登录页
+    localStorage.href = '/login.html'
+    // close 是固定写法,关闭弹窗的时候
+    layer.close(index)
+  })
+})
+// 统一添加错误回调或 complete 回调
+config.error = function (err) {
+  if (err.responseJSON?.cpde === 1 &&
+    err.responseJSON ? message === '身份认证失败！') {
+    localStorage.clear()
+    location.href = '/login.html'
+  }
 }
 
 // 问题：你在切换分支的时候：git checkout home

@@ -18,6 +18,16 @@ $.ajaxPrefilter(function (config) {
 
   // 统一设置请求的参数 - post 请求
   config.data = config.data && format2Json(config.data)
+
+  // 统一设置请求头
+  // 请求路径中由 /my 这样的字符串需要添加
+  // indexOf  startsWith  endsWith  includes  包含、包括的意思 
+  if (config.url.includes('/my')) {
+    // 经过调试 headers 属性是自定义的属性
+    config.headers = {
+      Authorization: localStorage.getItem('big_news_token') || ''
+    }
+  }
 })
 
 /**
