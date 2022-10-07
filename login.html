@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>登录页面</title>
-  <!-- 引入 layui 的css -->
-  <link rel="stylesheet" href="/assets/lib/layui/css/layui.css" />
-  <link rel="stylesheet" href="/assets/css/login.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+    <!-- 引入 layui 的css -->
+    <link rel="stylesheet" href="/assets/lib/layui/css/layui.css" />
+    <link rel="stylesheet" href="/assets/css/login.css" />
 </head>
 <!-- 
     tips: 
@@ -24,68 +24,68 @@
 -->
 
 <body>
-  <div class="layui-main">
-    <img src="/assets/images/logo.png" />
-  </div>
-  <div class="login-reg-box">
-    <!-- 登录、注册框的标题区域 -->
-    <h4>
-      <img src="/assets/images/login_title.png" />
-    </h4>
-    <!-- 登录、注册的表单区域 -->
-    <div class="login-wrap">
-      <form class="layui-form" id="formLogin">
-        <div class="layui-form-item">
-          <i class="layui-icon layui-icon-username"></i>
-          <!-- 需要使用 lay-verify 属性进行添加校验规则   如果有多个校验规则的话需要可以通过 | 隔开 -->
-          <!-- 原生input输入框本身就有 required 属性，就表示此输入框是一个必填项 -->
-          <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off"
-            class="layui-input" value="qd51">
-        </div>
-        <div class="layui-form-item">
-          <i class="layui-icon layui-icon-password"></i>
-          <input type="password" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
-            autocomplete="off" class="layui-input" value="qd51qd51">
-        </div>
-        <div class="layui-form-item">
-          <button class="layui-btn layui-btn-normal layui-btn-fluid" lay-submit id="loginBtn">登录</button>
-        </div>
-        <div class="layui-form-item">
-          <a href="javascript:;" id="go2Reg">去注册</a>
-        </div>
-      </form>
+    <div class="layui-main">
+        <img src="/assets/images/logo.png" />
     </div>
-    <div class="reg-wrap">
-      <form class="layui-form" id="formReg">
-        <div class="layui-form-item">
-          <i class="layui-icon layui-icon-username"></i>
-          <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off"
-            class="layui-input" value="qd51">
+    <div class="login-reg-box">
+        <!-- 登录、注册框的标题区域 -->
+        <h4>
+            <img src="/assets/images/login_title.png" />
+        </h4>
+        <!-- 登录、注册的表单区域 -->
+        <div class="login-wrap">
+            <form class="layui-form" id="formLogin">
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-username"></i>
+                    <!-- 需要使用 lay-verify 属性进行添加校验规则   如果有多个校验规则的话需要可以通过 | 隔开 -->
+                    <!-- 原生input输入框本身就有 required 属性，就表示此输入框是一个必填项 -->
+                    <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名"
+                        autocomplete="off" class="layui-input" value="qd51">
+                </div>
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-password"></i>
+                    <input type="password" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
+                        autocomplete="off" class="layui-input" value="111111">
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-normal layui-btn-fluid" lay-submit id="loginBtn">登录</button>
+                </div>
+                <div class="layui-form-item">
+                    <a href="javascript:;" id="go2Reg">去注册</a>
+                </div>
+            </form>
         </div>
-        <div class="layui-form-item">
-          <i class="layui-icon layui-icon-password"></i>
-          <input id="password" type="password" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
-            autocomplete="off" class="layui-input" value="qd51qd51">
+        <div class="reg-wrap">
+            <form class="layui-form" id="formReg">
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-username"></i>
+                    <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名"
+                        autocomplete="off" class="layui-input" value="qd51">
+                </div>
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-password"></i>
+                    <input id="password" type="password" name="password" required lay-verify="required|pwd"
+                        placeholder="请输入密码" autocomplete="off" class="layui-input" value="qd51qd51">
+                </div>
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-password"></i>
+                    <input type="password" name="repassword" required lay-verify="required|pwd|repwd"
+                        placeholder="请再次输入密码" autocomplete="off" class="layui-input" value="qd51qd51">
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-normal layui-btn-fluid" lay-submit>注册</button>
+                </div>
+                <div class="layui-form-item">
+                    <a href="javascript:;" id="go2Login">去登录</a>
+                </div>
+            </form>
         </div>
-        <div class="layui-form-item">
-          <i class="layui-icon layui-icon-password"></i>
-          <input type="password" name="repassword" required lay-verify="required|pwd|repwd" placeholder="请再次输入密码"
-            autocomplete="off" class="layui-input" value="qd51qd51">
-        </div>
-        <div class="layui-form-item">
-          <button class="layui-btn layui-btn-normal layui-btn-fluid" lay-submit>注册</button>
-        </div>
-        <div class="layui-form-item">
-          <a href="javascript:;" id="go2Login">去登录</a>
-        </div>
-      </form>
     </div>
-  </div>
 
-  <script src="/assets/lib/layui/layui.all.js"></script>
-  <script src="/assets/lib/jquery.js"></script>
-  <script src="/assets/js/baseApi.js"></script>
-  <script src="/assets/js/login.js"></script>
+    <script src="/assets/lib/layui/layui.all.js"></script>
+    <script src="/assets/lib/jquery.js"></script>
+    <script src="/assets/js/baseApi.js"></script>
+    <script src="/assets/js/login.js"></script>
 </body>
 
 </html>
